@@ -1,1 +1,1 @@
-var friendsData = require('../data/friend.js')
+var friendsData = require('../data/friend.js');
