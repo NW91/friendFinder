@@ -49,13 +49,13 @@ var friendsData = [
         }
   ];
 
-  var addFriend = function(app) {
-      app.post("/survey", function(req, res) {
-          var newFriend = req.body;
-          friendsData.push(newFriend);
-          res.send(friendsData);
-      });
-  };
+//   var addFriend = function(app) {
+//       app.post("/survey", function(req, res) {
+//           var newFriend = req.body;
+//           friendsData.push(newFriend);
+//           res.send(friendsData);
+//       });
+//   };
 
   module.exports = friendsData;
-  module.exports.addFriend = addFriend;
+//   module.exports.addFriend = addFriend;

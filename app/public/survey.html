@@ -14,6 +14,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <!--Jquery Library-->
 <script src="https://code.jquery.com/jquery.js"></script>
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 <!--Chosen-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.css">
 <script src="https://cdnjs.cloudfare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
@@ -155,5 +157,66 @@
         </footer>
         
     </div>
+
+<!--Add javascript/jquery to connect button/send information-->
+<script>
+
+//onclick for the submit button
+    $("#submit").on("click", function() {
+
+        function validateForm() {
+            var isValid = true;
+            $(".form-control").each(function() {
+                if ($(this).val() === "") {
+                    isValid = false;
+                }
+            });
+
+            $(".chosen-select").each(function() {
+                if ($(this).val() === "") {
+                isValid = false;
+            }
+            });
+            return isValid;
+        }
+        
+        //If all required fields are valid
+        if (validateForm()) {
+            //Creatse an object for the user data
+            var userData = {
+                name: $("#name").val(),
+                photo: $("#photo").val(),
+                scores: [
+                    $("#q1").val(),
+                    $("#q2").val(),
+                    $("#q3").val(),
+                    $("#q4").val(),
+                    $("#q5").val(),
+                    $("#q6").val(),
+                    $("#q7").val(),
+                    $("#q8").val(),
+                    $("#q9").val(),
+                    $("#q10").val()
+                ]
+            };
+
+            //Grab the URL of the current page
+            var currentURL = window.location.origin;
+
+                //AJAX post the data to the friends API
+                $.post(currentURL + "/api/friends", userData, function (data) {
+                    //Grab the result from the AJAX post so the name and photo are displayed
+                    $("#matchName").text(data.name);
+                    $("#matchImg").attr("src", data.photo);
+                    //Show the modal with the best match
+                    $("#resultsModal").modal("toggle");
+                });
+            } else {
+                alert("Please answer everything before submitting!");
+            }
+            return false;
+    });
+
+</script>
 </body>
 </html>

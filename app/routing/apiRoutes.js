@@ -14,6 +14,7 @@ module.exports = function(app, path) {
             // friendDifference = 1000
         };
 
+        //user data
         var userData = req.body;
         var userScores = userData.scores;
 
@@ -23,19 +24,24 @@ module.exports = function(app, path) {
         for (var i = 0; i < friendsData.length; i++) {
             totalDifference = 0;
 
+            console.log(friendsData[i]);
+            totalDifference = 0;
+
             //Looping through every score within the friendfinder Database.
             for (var j = 0; j <friendsData[i].scores[j]; j++) {
                 totalDifference += Math.abs(parseInt(userScores[j]) - parseInt(friendsData[i].scores[j]));
                
-            if (totalDifference <= perfectMatch.friendsDifference) {
+            if (totalDifference <= perfectMatch.friendsDataDifference) {
+
                 perfectMatch.name = friendsData[i].name;
                 perfectMatch.photo = friendsData[i].photo;
-                perfectMatch.friendDifference = totalDifference;
+                perfectMatch.friendsDataDifference = totalDifference;
             }
         }
             
     }
 
+    //saves to the user's inputted data to the database
     friendsData.push(userData);
     
     res.json(perfectMatch)
