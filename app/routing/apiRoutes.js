@@ -1,6 +1,8 @@
 var friendsData = require('../data/friend.js');
+var path = require('path');
 
-module.exports = function(app) {
+
+module.exports = function(app, path) {
     app.get("/api/friends", function(req, res){
         res.json(friendsData);
     });
@@ -9,7 +11,7 @@ module.exports = function(app) {
         var perfectMatch = {
             name: "",
             photo: "",
-            friendDifference = 1000
+            // friendDifference = 1000
         };
 
         var userData = req.body;
