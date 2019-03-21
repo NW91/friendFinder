@@ -24,7 +24,6 @@ app.use(bodyParser.text({ type: 'text/html' }))
 //function that reads HTMLRouting.js
 require("./app/routing/htmlRoutes") (app, path);
 
-
 //function that reads apiRoutes.js?
 require("./app/routing/htmlRoutes.js")(app);
 
